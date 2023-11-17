@@ -27,9 +27,7 @@ export default class CenterBoard extends Component<{ rows: KeyDefinition[][], sp
           <div className="key-row">
             {this.props.rows[3].slice(0, 2).map(this._renderKey)}
             <div className="spacebar-container">
-              <Key className="spacebar" definition={this._spacebarKeyDefinition}>
-                {this.props.spacebarText}
-              </Key>
+              <Key className="spacebar" definition={this._spacebarKeyDefinition}/>
             </div>
             {this.props.rows[3].slice(2).map(this._renderKey)}
           </div>

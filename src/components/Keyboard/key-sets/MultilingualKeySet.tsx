@@ -1,6 +1,4 @@
-import React from 'react';
 import EventEmitter from 'events';
-import SimpleKeyDefinition from '../../../models/SimpleKeyDefinition';
 import DanishKeySet from './DanishKeySet';
 import EnglishKeySet from './EnglishKeySet';
 import FrenchKeySet from './FrenchKeySet';
@@ -11,7 +9,6 @@ import NorwegianKeySet from './NorwegianKeySet';
 import RussianKeySet from './RussianKeySet';
 import SpanishKeySet from './SpanishKeySet';
 import SwedishKeySet from './SwedishKeySet';
-import globeIcon from './assets/globe-icon.svg';
 
 export default class MultilingualKeySet extends EventEmitter {
 
@@ -56,7 +53,7 @@ export default class MultilingualKeySet extends EventEmitter {
 
     const rows = this._getKeySet().getRows();
     // Replace the existing @ key in the bottom row with the globe icon for switching languages.
-    rows[3][1] = new SimpleKeyDefinition(this._getSwitchLanguageIcon() , this._handleSwitchLanguageKeyClick);
+    // rows[3][1] = new SimpleKeyDefinition(this._getSwitchLanguageIcon() , this._handleSwitchLanguageKeyClick);
     return rows;
   }
 
@@ -74,19 +71,8 @@ export default class MultilingualKeySet extends EventEmitter {
     return this._keySets[this._keySetIndex];
   }
 
-  private _getSwitchLanguageIcon() {
-
-    return <img style={{ width: '1.2em', height: '1.2em' }} src={globeIcon} alt="globe"/>;
-  }
-
   private _handleLayoutChanged = () => {
 
-    this.emit('layoutChanged', this);
-  }
-
-  private _handleSwitchLanguageKeyClick = () => {
-
-    this._keySetIndex = this._keySetIndex >= this._keySets.length - 1 ? 0 : this._keySetIndex + 1;
     this.emit('layoutChanged', this);
   }
 }

@@ -43,9 +43,9 @@ export default abstract class LanguageKeySet extends EventEmitter {
   protected getSpecialCharactersByRow() {
     return [
       [ '@', '#', ...this.getCurrencyCharacters(), '%', '&', '*', '-', '+' ],
-      [ '~', '`', '"', '\'', ':', ';', '_', '=', '\\', '/' ],
+      [ '~', '`', '"', '\'', ':', ';', ',', '=', '\\', '/' ],
       [ '{', '}', '[', ']', '<', '>', '^', '|', '(', ')' ],
-      [ '@', ',', '.']
+      [ '@', '_', '.']
     ];
   }
 
@@ -69,7 +69,7 @@ export default abstract class LanguageKeySet extends EventEmitter {
       charactersByRow[0].map(this._createSimpleKeyDefinition),
       charactersByRow[1].map(this._createSimpleKeyDefinition),
       [ this._getShiftKey(), ...charactersByRow[2].map(this._createSimpleKeyDefinition) ],
-      [ this._getSpecialCharacterSetKey(), ...[ '@', ',', '.' ].map(this._createSimpleKeyDefinition) ]
+      [ this._getSpecialCharacterSetKey(), ...[ '@', '_', '.' ].map(this._createSimpleKeyDefinition) ]
     ];
     return rows;
   }
