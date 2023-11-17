@@ -49,7 +49,6 @@ export default class Keyboard extends Component {
           <Key className="backspace-icon" definition={this._backspaceKeyDefinition}>
             <img src={backspaceIcon} alt="backspace"/>
           </Key>
-
         </div>
         <div className="right-pad-container">
           <RightPad/>
