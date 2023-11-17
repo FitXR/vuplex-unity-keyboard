@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
 import Key from '../Key';
 import SimpleKeyDefinition from '../../../models/SimpleKeyDefinition';
-import sendKeyboardInput from '../../../utils/sendKeyboardInput';
 import './styles.scss';
+import sendMultiCharacterKeyboardInput from "../../../utils/sendMultiCharacterKeyboardInput";
 
 export default class RightPad extends Component {
 
   private _rows = [
     [
-      new SimpleKeyDefinition('@gmail.com', sendKeyboardInput),
+      new SimpleKeyDefinition('@gmail.com', sendMultiCharacterKeyboardInput),
     ],
     [
-      new SimpleKeyDefinition('@hotmail.com', sendKeyboardInput),
+      new SimpleKeyDefinition('@hotmail.com', sendMultiCharacterKeyboardInput),
     ],
     [
-      new SimpleKeyDefinition('@yahoo.com', sendKeyboardInput),
+      new SimpleKeyDefinition('@yahoo.com', sendMultiCharacterKeyboardInput),
     ],
     [
-      new SimpleKeyDefinition('@gmail.co.uk', sendKeyboardInput),
+      new SimpleKeyDefinition('@gmail.co.uk', sendMultiCharacterKeyboardInput),
     ],
     [
-      new SimpleKeyDefinition('@melero.museum', sendKeyboardInput),
+      new SimpleKeyDefinition('@melero.museum', sendMultiCharacterKeyboardInput),
     ]
   ];
 
