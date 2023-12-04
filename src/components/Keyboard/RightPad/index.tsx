@@ -17,16 +17,16 @@ export default class RightPad extends Component {
       new SimpleKeyDefinition('@yahoo.com', sendMultiCharacterKeyboardInput),
     ],
     [
-      new SimpleKeyDefinition('@gmail.co.uk', sendMultiCharacterKeyboardInput),
+      new SimpleKeyDefinition('@icloud.com', sendMultiCharacterKeyboardInput),
     ],
     [
-      new SimpleKeyDefinition('@melero.museum', sendMultiCharacterKeyboardInput),
+      new SimpleKeyDefinition('@outlook.com', sendMultiCharacterKeyboardInput),
     ]
   ];
 
   render() {
     return (
-      <div className="num-pad">
+      <div className="email-pad">
         <div className="key-area">
             <div className="key-row">
               <div className="key-offset-margin"/>

@@ -45,3 +45,36 @@
     }
   }
 }
+
+.email-pad {
+  width: 100%;
+  min-width: 150px;
+  height: 100%;
+  border-radius: $keyboard-border-radius;
+  background-color: $keyboard-color;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .key-area {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: 90%;
+
+    .key-row {
+      display: flex;
+      justify-content: space-around;
+      flex: 1 1 auto;
+      padding-left: 7px;
+      padding-right: 7px;
+
+      .key {
+        flex: 1 0 auto;
+        padding-left: 7px;
+        padding-right: 7px;
+      }
+    }
+  }
+}
