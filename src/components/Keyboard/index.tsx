@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import CenterBoard from './CenterBoard';
 import MultilingualKeySet from './key-sets/MultilingualKeySet';
 import backspaceIcon from './assets/backspace-icon.svg';
-import returnIcon from './assets/return-icon.svg';
+import returnIcon from './assets/tick-icon.svg';
 import Key from './Key';
 import NumPad from './NumPad';
 import RightPad from './RightPad';
 import MessageType from '../../models/MessageType';
 import SimpleKeyDefinition from '../../models/SimpleKeyDefinition';
 import sendKeyboardInput from '../../utils/sendKeyboardInput';
-import VoiceButton from './VoiceButton';
 import './styles.scss';
 
 export default class Keyboard extends Component {
 
   private _keySet = new MultilingualKeySet();
+  private _returnKeyDefinition = new SimpleKeyDefinition('Enter', sendKeyboardInput);
   state = {
     language: this._keySet.language,
     layout: this._keySet.layout,
@@ -22,7 +22,6 @@ export default class Keyboard extends Component {
     voiceRecognitionActive: false
   };
   private _backspaceKeyDefinition = new SimpleKeyDefinition('Backspace', sendKeyboardInput);
-  private _returnKeyDefinition = new SimpleKeyDefinition('Enter', sendKeyboardInput);
 
   constructor(props) {
     super(props);
@@ -61,7 +60,6 @@ export default class Keyboard extends Component {
               </div>
             </Key>
           </div>
-          {this._renderVoiceButton()}
         </div>
         <div className="right-pad-container">
           <RightPad/>
@@ -96,30 +94,10 @@ export default class Keyboard extends Component {
 
   private _handleLayoutChange = (keySet) => this.setState({ language: keySet.language, layout: keySet.layout });
 
-  private _handleVoiceButtonMouseDown = (event) => {
-
-    event.preventDefault();
-    const voiceRecognitionActive = !this.state.voiceRecognitionActive;
-    this.setState({ voiceRecognitionActive });
-    window.vuplex.postMessage({
-      type: voiceRecognitionActive ? MessageType.VOICE_RECOGNITION_START_REQUESTED : MessageType.VOICE_RECOGNITION_FINISH_REQUESTED
-    });
-  }
-
   private _initMessages = () => {
 
     window.vuplex.addEventListener('message', this._handleReceivedMessage);
     window.vuplex.postMessage({ type: MessageType.KEYBOARD_INITIALIZED });
   }
 
-  private _renderVoiceButton() {
-
-    if (this.state.voiceRecognitionEnabled) {
-      return (
-        <div className="voice-button-container">
-          <VoiceButton onMouseDown={this._handleVoiceButtonMouseDown} active={this.state.voiceRecognitionActive}/>
-        </div>
-      );
-    }
-  }
 }
