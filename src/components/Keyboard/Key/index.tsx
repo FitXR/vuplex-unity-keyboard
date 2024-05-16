@@ -76,12 +76,13 @@ export default class Key extends Component<{ className?: string, definition: Key
 
     this._clearTimers();
     this.setState({ keyState: KeyState.DOWN });
-    this.props.definition.onClick();
+    // FitXR note: this is the original implementation that registers click on key down
+    // this.props.definition.onClick();
     // After the key is continously held down for a second, start triggering the key every 100 ms.
-    this._keyDownTimeoutId = setTimeout(() => {
-      this.setState({ keyState: KeyState.DOWN_CONTINUOUSLY });
-      this._keyDownContinuouslyIntervalId = setInterval(this.props.definition.onClick, 100);
-    }, 1000);
+    // this._keyDownTimeoutId = setTimeout(() => {
+    //   this.setState({ keyState: KeyState.DOWN_CONTINUOUSLY });
+    //   this._keyDownContinuouslyIntervalId = setInterval(this.props.definition.onClick, 100);
+    // }, 1000);
   }
 
   private _handleMouseLeave = () => {
@@ -95,8 +96,15 @@ export default class Key extends Component<{ className?: string, definition: Key
   }
 
   private _handleMouseUp = () => {
-
     this._clearTimers();
+
+    // FitXR addition to avoid registering key presses on keys not click "down"
+    const { keyState } = this.state;
+    if (keyState === KeyState.DOWN || keyState === KeyState.DOWN_CONTINUOUSLY)
+    {
+      this.props.definition.onClick();
+    }
+
     this.setState({ keyState: KeyState.UP });
     this._keyUpTimeoutId = setTimeout(() => this.setState({ keyState: KeyState.NORMAL }), 1000);
   }
