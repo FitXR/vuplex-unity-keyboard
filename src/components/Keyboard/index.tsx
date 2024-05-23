@@ -10,6 +10,7 @@ import SimpleKeyDefinition from '../../models/SimpleKeyDefinition';
 import sendKeyboardInput from '../../utils/sendKeyboardInput';
 import BackspaceIcon from '../BackspaceIcon/BackspaceIcon';
 import './styles.scss';
+import KeyboardType from './KeyboardType';
 
 export default class Keyboard extends Component {
 
@@ -19,7 +20,8 @@ export default class Keyboard extends Component {
     language: this._keySet.language,
     layout: this._keySet.layout,
     voiceRecognitionEnabled: false,
-    voiceRecognitionActive: false
+    voiceRecognitionActive: false,
+    keyboardType: KeyboardType.Alphanumeric
   };
   private _backspaceKeyDefinition = new SimpleKeyDefinition('Backspace', sendKeyboardInput);
 
@@ -29,7 +31,6 @@ export default class Keyboard extends Component {
   }
 
   componentDidMount() {
-
     if (window.vuplex) {
       this._initMessages();
     } else {
@@ -61,9 +62,12 @@ export default class Keyboard extends Component {
             </Key>
           </div>
         </div>
-        <div className="right-pad-container">
-          <RightPad/>
-        </div>
+        {
+         this.state.keyboardType === KeyboardType.Email &&
+          <div className="right-pad-container">
+            <RightPad/>
+          </div>
+        }
       </div>
     );
   }
@@ -91,13 +95,15 @@ export default class Keyboard extends Component {
       case MessageType.VOICE_RECOGNITION_STARTED:
         this.setState({ voiceRecognitionActive: true });
         break;
+      case MessageType.KEYBOARD_TYPE:
+        this.setState({ keyboardType: data.value });
+        break;
     }
   }
 
   private _handleLayoutChange = (keySet) => this.setState({ language: keySet.language, layout: keySet.layout });
 
   private _initMessages = () => {
-
     window.vuplex.addEventListener('message', this._handleReceivedMessage);
     window.vuplex.postMessage({ type: MessageType.KEYBOARD_INITIALIZED });
   }
