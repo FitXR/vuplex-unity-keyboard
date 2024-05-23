@@ -31,7 +31,7 @@
     align-items: center;
 
     .backspace-icon {
-      $backspace-key-color: #7A929F;
+      $backspace-key-color: #8C8C8C;
 
       width: 60%;
       border-radius: 0.5rem;
@@ -44,13 +44,13 @@
 
       &:hover, &.hover {
         background-color: transparent;
-        > svg > path {
+        > svg > path:first-child {
           fill: darken($backspace-key-color, 5%);
         }
       }    
 
       &.key-down {        
-        > svg > path {
+        > svg > path:first-child {
           fill: darken($backspace-key-color, 10%);
         }
       }   
@@ -58,7 +58,7 @@
       &.key-up {
         animation: none;
         
-        > svg > path {
+        > svg > path:first-child {
           animation: backspace-highlight 1s;
         }
       }    

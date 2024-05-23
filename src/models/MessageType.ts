@@ -8,6 +8,7 @@ enum MessageType {
   VOICE_RECOGNITION_ENABLED = 'keyboard.voiceRecognitionEnabled',
   VOICE_RECOGNITION_FINISHED = 'keyboard.voiceRecognitionFinished',
   VOICE_RECOGNITION_STARTED = 'keyboard.voiceRecognitionStarted',
+  KEYBOARD_TYPE = 'KeyboardType',
 
   /**
   * Outgoing messages
@@ -19,3 +20,4 @@ enum MessageType {
 };
 
 export default MessageType;
+
