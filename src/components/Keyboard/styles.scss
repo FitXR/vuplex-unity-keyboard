@@ -29,16 +29,47 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     .backspace-icon {
+      $backspace-key-color: #7A929F;
+
       width: 60%;
       border-radius: 0.5rem;
-
-      &:hover {
-        background-color: lighten($keyboard-color, 70%);
+      background-color: transparent;
+      
+      > svg {
+        width: 100%;
+        height: 100%;
       }
 
-      img {
-        width: 100%;
+      &:hover, &.hover {
+        background-color: transparent;
+        > svg > path {
+          fill: darken($backspace-key-color, 5%);
+        }
+      }    
+
+      &.key-down {        
+        > svg > path {
+          fill: darken($backspace-key-color, 10%);
+        }
+      }   
+
+      &.key-up {
+        animation: none;
+        
+        > svg > path {
+          animation: backspace-highlight 1s;
+        }
+      }    
+
+      @keyframes backspace-highlight {
+        0% {
+          fill: darken($backspace-key-color, 15%);
+        }
+        100% {
+          fill: auto;
+        }
       }
     }
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CenterBoard from './CenterBoard';
 import MultilingualKeySet from './key-sets/MultilingualKeySet';
-import backspaceIcon from './assets/backspace-icon.svg';
 import returnIcon from './assets/tick-icon.svg';
 import Key from './Key';
 import NumPad from './NumPad';
@@ -9,6 +8,7 @@ import RightPad from './RightPad';
 import MessageType from '../../models/MessageType';
 import SimpleKeyDefinition from '../../models/SimpleKeyDefinition';
 import sendKeyboardInput from '../../utils/sendKeyboardInput';
+import BackspaceIcon from '../BackspaceIcon/BackspaceIcon';
 import './styles.scss';
 
 export default class Keyboard extends Component {
@@ -49,7 +49,7 @@ export default class Keyboard extends Component {
         </div>
         <div className="enter-key-area">
           <Key className="backspace-icon" definition={this._backspaceKeyDefinition}>
-            <img src={backspaceIcon} alt="backspace"/>
+            <BackspaceIcon />
           </Key>
           <div className="return-key-container">
             <Key definition={this._returnKeyDefinition} className="return-key-component">
