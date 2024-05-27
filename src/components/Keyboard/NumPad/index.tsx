@@ -25,7 +25,7 @@ export default class NumPad extends Component {
     [
       new SimpleKeyDefinition('.', sendKeyboardInput),
       new SimpleKeyDefinition('0', sendKeyboardInput),
-      new SimpleKeyDefinition('-', sendKeyboardInput),
+      new SimpleKeyDefinition('/', sendKeyboardInput),
     ]
   ];
 
