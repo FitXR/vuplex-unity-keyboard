@@ -1,29 +1,40 @@
 import React, { Component } from 'react';
+
+import MessageType from '../../models/MessageType';
+import SimpleKeyDefinition from '../../models/SimpleKeyDefinition';
+import sendKeyboardInput from '../../utils/sendKeyboardInput';
+import BackspaceIcon from '../BackspaceIcon/BackspaceIcon';
+
 import CenterBoard from './CenterBoard';
 import MultilingualKeySet from './key-sets/MultilingualKeySet';
 import returnIcon from './assets/tick-icon.svg';
 import Key from './Key';
 import NumPad from './NumPad';
 import RightPad from './RightPad';
-import MessageType from '../../models/MessageType';
-import SimpleKeyDefinition from '../../models/SimpleKeyDefinition';
-import sendKeyboardInput from '../../utils/sendKeyboardInput';
-import BackspaceIcon from '../BackspaceIcon/BackspaceIcon';
+
 import './styles.scss';
 import KeyboardType from './KeyboardType';
 
 export default class Keyboard extends Component {
-
   private _keySet = new MultilingualKeySet();
-  private _returnKeyDefinition = new SimpleKeyDefinition('Enter', sendKeyboardInput);
+  private _returnKeyDefinition = new SimpleKeyDefinition(
+    'Enter',
+    sendKeyboardInput,
+  );
   state = {
     language: this._keySet.language,
     layout: this._keySet.layout,
     voiceRecognitionEnabled: false,
     voiceRecognitionActive: false,
-    keyboardType: KeyboardType.Alphanumeric
+    showNumPad: true,
+    showAlphanumeric: true,
+    showEmailSuggestion: false,
   };
-  private _backspaceKeyDefinition = new SimpleKeyDefinition('Backspace', sendKeyboardInput);
+
+  private _backspaceKeyDefinition = new SimpleKeyDefinition(
+    'Backspace',
+    sendKeyboardInput,
+  );
 
   constructor(props) {
     super(props);
@@ -39,33 +50,47 @@ export default class Keyboard extends Component {
   }
 
   render() {
+    const {showNumPad, showAlphanumeric, showEmailSuggestion} = this.state;
+
     return (
       <div className="keyboard">
-        <div className="num-pad-container">
-          <NumPad/>
-        </div>
-        <div className="board-margin"/>
-        <div className="center-board-container">
-          <CenterBoard rows={this._keySet.getRows()} spacebarText={this._keySet.language}/>
-        </div>
+        {showNumPad && 
+          <>
+            <div className="num-pad-container">
+              <NumPad />
+            </div>
+            <div className="board-margin" /> 
+          </>
+        }
+        {showAlphanumeric && 
+          <div className="center-board-container">
+            <CenterBoard
+              rows={this._keySet.getRows()}
+              spacebarText={this._keySet.language}
+            />
+          </div>
+        }
         <div className="enter-key-area">
-          <Key className="backspace-icon" definition={this._backspaceKeyDefinition}>
+          <Key
+            className="backspace-icon"
+            definition={this._backspaceKeyDefinition}>
             <BackspaceIcon />
           </Key>
           <div className="return-key-container">
-            <Key definition={this._returnKeyDefinition} className="return-key-component">
+            <Key
+              definition={this._returnKeyDefinition}
+              className="return-key-component">
               <div className="return-key">
                 <div className="return-key-text">
-                  <img src={returnIcon} alt="return"/>
+                  <img src={returnIcon} alt="return" />
                 </div>
               </div>
             </Key>
           </div>
         </div>
-        {
-         this.state.keyboardType === KeyboardType.Email &&
+        {showEmailSuggestion &&
           <div className="right-pad-container">
-            <RightPad/>
+            <RightPad />
           </div>
         }
       </div>
@@ -73,7 +98,6 @@ export default class Keyboard extends Component {
   }
 
   private _handleReceivedMessage = (message) => {
-
     const data = JSON.parse(message.data);
 
     // eslint-disable-next-line
@@ -94,16 +118,31 @@ export default class Keyboard extends Component {
         this.setState({ voiceRecognitionActive: true });
         break;
       case MessageType.KEYBOARD_TYPE:
-        this.setState({ keyboardType: data.value });
+        this.setKeyboardType(data.value);
+        break;
+    }
+  };
+
+  private setKeyboardType(keyboardType: KeyboardType) {
+    switch(keyboardType) {
+      case KeyboardType.Email:
+        this.setState({ showNumPad: true, showAlphanumeric: true, showEmailSuggestion: true });
+        break;
+      case KeyboardType.Numeric:
+        this.setState({ showNumPad: true, showAlphanumeric: false, showEmailSuggestion: false });
+        break;
+      case KeyboardType.Alphanumeric:
+      default:
+        this.setState({ showNumPad: true, showAlphanumeric: true, showEmailSuggestion: false });
         break;
     }
   }
 
-  private _handleLayoutChange = (keySet) => this.setState({ language: keySet.language, layout: keySet.layout });
+  private _handleLayoutChange = (keySet) =>
+    this.setState({ language: keySet.language, layout: keySet.layout });
 
   private _initMessages = () => {
     window.vuplex.addEventListener('message', this._handleReceivedMessage);
     window.vuplex.postMessage({ type: MessageType.KEYBOARD_INITIALIZED });
-  }
-
+  };
 }
