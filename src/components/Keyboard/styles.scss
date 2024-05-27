@@ -7,8 +7,9 @@
   justify-content: center;
   
   .num-pad-container {
-    flex: 1 1 15%;
-    max-width: 450px;
+    flex: 1 1 15%; 
+    display: flex;
+    justify-content: flex-end;
   }
 
   .center-board-container {
@@ -24,17 +25,19 @@
   }
 
   .enter-key-area {
+    flex: 1 1 5%;
     height: 100%;
+    padding: 0 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start;
 
     .backspace-icon {
       $backspace-key-color: #8C8C8C;
 
-      width: 60%;
-      height: 35%;
+      aspect-ratio: 4/3;
+      height: 25%;
       transform: translateX(-5%);
 
       border-radius: 0.5rem;
@@ -77,7 +80,7 @@
     }
 
     .return-key-container {
-      width: 60%;
+      aspect-ratio: 1/1;
       height: 35%;
       $return-key-color: #1868FC;
 

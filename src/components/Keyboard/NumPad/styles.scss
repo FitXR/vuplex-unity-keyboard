@@ -1,7 +1,6 @@
 @import '../../../variables.scss';
 
 .num-pad {
-  width: 100%;
   height: 100%;
   border-radius: $keyboard-border-radius;
   background-color: $keyboard-color;
@@ -9,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  aspect-ratio: 3/4;
 
   .key-area {
     display: flex;

@@ -11,9 +11,9 @@ import returnIcon from './assets/tick-icon.svg';
 import Key from './Key';
 import NumPad from './NumPad';
 import RightPad from './RightPad';
+import KeyboardType from './KeyboardType';
 
 import './styles.scss';
-import KeyboardType from './KeyboardType';
 
 export default class Keyboard extends Component {
   private _keySet = new MultilingualKeySet();
@@ -55,20 +55,20 @@ export default class Keyboard extends Component {
     return (
       <div className="keyboard">
         {showNumPad && 
-          <>
             <div className="num-pad-container">
               <NumPad />
             </div>
-            <div className="board-margin" /> 
-          </>
         }
         {showAlphanumeric && 
-          <div className="center-board-container">
-            <CenterBoard
-              rows={this._keySet.getRows()}
-              spacebarText={this._keySet.language}
-            />
-          </div>
+          <>
+            <div className="board-margin" /> 
+            <div className="center-board-container">
+              <CenterBoard
+                rows={this._keySet.getRows()}
+                spacebarText={this._keySet.language}
+              />
+            </div>
+          </>
         }
         <div className="enter-key-area">
           <Key
