@@ -20,6 +20,7 @@ export default class Keyboard extends Component {
   private _returnKeyDefinition = new SimpleKeyDefinition(
     'Enter',
     sendKeyboardInput,
+    'uiPrimaryButtonClick'
   );
   state = {
     language: this._keySet.language,
