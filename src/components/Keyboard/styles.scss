@@ -33,6 +33,7 @@ $backspace-key-hover: lighten($backspace-key, 5%);
     flex: 1 1 5%;
     height: 100%;
     padding: 0 40px;
+    box-sizing: border-box; 
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
