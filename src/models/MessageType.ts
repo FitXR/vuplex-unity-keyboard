@@ -10,6 +10,7 @@ enum MessageType {
   VOICE_RECOGNITION_FINISHED = 'keyboard.voiceRecognitionFinished',
   VOICE_RECOGNITION_STARTED = 'keyboard.voiceRecognitionStarted',
   KEYBOARD_TYPE = 'KeyboardType',
+  SWITCH_LAYOUT = 'SwitchLayout',
 
   /**
   * Outgoing messages

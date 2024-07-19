@@ -12,6 +12,7 @@ import Key from './Key';
 import NumPad from './NumPad';
 import RightPad from './RightPad';
 import KeyboardType from './KeyboardType';
+import KeyboardLayout from './KeyboardLayout';
 
 import './styles.scss';
 
@@ -121,12 +122,15 @@ export default class Keyboard extends Component {
         this.setState({ voiceRecognitionActive: true });
         break;
       case MessageType.KEYBOARD_TYPE:
-        this.setKeyboardType(data.value);
+        this._setKeyboardType(data.value);
+        break;
+      case MessageType.SWITCH_LAYOUT:
+        this._switchLayout(data.value);
         break;
     }
   };
 
-  private setKeyboardType(keyboardType: KeyboardType) {
+  private _setKeyboardType(keyboardType: KeyboardType) {
     switch(keyboardType) {
       case KeyboardType.Email:
         this.setState({ showNumPad: true, showAlphanumeric: true, showEmailSuggestion: true });
@@ -140,6 +144,14 @@ export default class Keyboard extends Component {
         break;
     }
   }
+
+  private _switchLayout(layoutString: string) {
+    const layoutEnumValue = KeyboardLayout[layoutString as keyof typeof KeyboardLayout];
+    const layout = layoutEnumValue !== undefined 
+      ? layoutEnumValue 
+      : KeyboardLayout.LOWERCASE;
+    return this.setState({ layout: layout });
+  };
 
   private _handleLayoutChange = (keySet) =>
     this.setState({ language: keySet.language, layout: keySet.layout });
