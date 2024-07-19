@@ -1,8 +1,5 @@
 @import '../../../variables.scss';
 
-// Make it slightly darker to make it easier to see.
-$uppercase-color: darken($theme-color, 15%);
-
 $arrow-line-width: 0.35em;
 
 .shift-key-icon {
@@ -19,7 +16,7 @@ $arrow-line-width: 0.35em;
     border-right: 0.45em solid transparent;
 
     &.shift-arrow-colored {
-      border-bottom-color: $uppercase-color;
+      border-bottom-color: $button-primary-pressed;
     }
   }
   .regular-arrow-line {
@@ -28,7 +25,7 @@ $arrow-line-width: 0.35em;
     background-color: white;
 
     &.shift-arrow-colored {
-      background-color: $uppercase-color;
+      background-color: $button-primary-pressed;
     }
   }
 
@@ -36,7 +33,7 @@ $arrow-line-width: 0.35em;
     .caps-lock-line-top {
       height: 0.3em;
       width: $arrow-line-width;
-      background-color: $uppercase-color;
+      background-color: $button-primary-pressed;
     }
     .caps-lock-line-middle {
       height: 0.2em;
@@ -44,7 +41,7 @@ $arrow-line-width: 0.35em;
     .caps-lock-line-bottom {
       height: 0.1em;
       width: $arrow-line-width;
-      background-color: $uppercase-color;
+      background-color: $button-primary-pressed;
     }
   }
 }
