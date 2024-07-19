@@ -49,6 +49,12 @@ export default abstract class LanguageKeySet extends EventEmitter {
     ];
   }
 
+  public setLayout(layout: KeyboardLayout) {
+
+    this._layout = layout;
+    this.emit('layoutChanged', this);
+  }
+  
   public getRows() {
 
     return this._layout === KeyboardLayout.SPECIAL ? this._getSpecialCharacterRows() : this._getAlphabeticCharactersRows();
@@ -77,7 +83,7 @@ export default abstract class LanguageKeySet extends EventEmitter {
   private _getAlphabeticCharacterSetKey() {
 
     const symbol = this.getAlphabeticCharacterSetKeySymbol();
-    return new SimpleKeyDefinition(symbol, () => this._setLayout(KeyboardLayout.LOWERCASE));
+    return new SimpleKeyDefinition(symbol, () => this.setLayout(KeyboardLayout.LOWERCASE));
   }
 
   private _getShiftKey() {
@@ -99,35 +105,30 @@ export default abstract class LanguageKeySet extends EventEmitter {
 
   private _getSpecialCharacterSetKey() {
 
-    return new SimpleKeyDefinition('#+=', () => this._setLayout(KeyboardLayout.SPECIAL));
+    return new SimpleKeyDefinition('#+=', () => this.setLayout(KeyboardLayout.SPECIAL));
   }
 
   private _handleShiftKeyPressed = () => {
 
     switch(this._layout) {
       case KeyboardLayout.LOWERCASE:
-        this._setLayout(KeyboardLayout.UPPERCASE);
+        this.setLayout(KeyboardLayout.UPPERCASE);
         break;
       case KeyboardLayout.UPPERCASE:
-        this._setLayout(KeyboardLayout.CAPS_LOCK);
+        this.setLayout(KeyboardLayout.CAPS_LOCK);
         break;
       default:
-        this._setLayout(KeyboardLayout.LOWERCASE);
+        this.setLayout(KeyboardLayout.LOWERCASE);
     }
   };
 
   private _handleSimpleKeyPress = (key) => {
 
     if (this._layout === KeyboardLayout.UPPERCASE) {
-      this._setLayout(KeyboardLayout.LOWERCASE);
+      this.setLayout(KeyboardLayout.LOWERCASE);
     }
 
     sendKeyboardInput(key);
   }
 
-  private _setLayout(layout: KeyboardLayout) {
-
-    this._layout = layout;
-    this.emit('layoutChanged', this);
-  }
 }

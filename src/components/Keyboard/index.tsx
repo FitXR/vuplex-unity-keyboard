@@ -148,7 +148,8 @@ export default class Keyboard extends Component {
     const layout = layoutEnumValue !== undefined 
       ? layoutEnumValue 
       : KeyboardLayout.LOWERCASE;
-    return this.setState({ layout: layout });
+    this.setState({ layout: layout });
+    this._keySet.setLayout(layout);
   };
 
   private _handleLayoutChange = (keySet) =>

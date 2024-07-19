@@ -9,6 +9,7 @@ import NorwegianKeySet from './NorwegianKeySet';
 import RussianKeySet from './RussianKeySet';
 import SpanishKeySet from './SpanishKeySet';
 import SwedishKeySet from './SwedishKeySet';
+import KeyboardLayout from '../KeyboardLayout';
 
 export default class MultilingualKeySet extends EventEmitter {
 
@@ -64,6 +65,11 @@ export default class MultilingualKeySet extends EventEmitter {
       this._keySetIndex = this._keySets.findIndex(k => k.languageCode === 'en');
     }
     this.emit('layoutChanged', this);
+  }
+
+  setLayout(layout: KeyboardLayout) {
+    
+    this._keySets.forEach(keySet => keySet.setLayout(layout));
   }
 
   private _getKeySet() {
