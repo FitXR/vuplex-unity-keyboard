@@ -1,15 +1,12 @@
 @import '../../variables.scss';
 
-$backspace-key: #7A929F;
-$backspace-key-pressed: darken($backspace-key, 10%);
-$backspace-key-hover: lighten($backspace-key, 5%);
-
-
 .keyboard {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
+  padding: 5px;
+  box-sizing: border-box;
   
   .num-pad-container {
     flex: 1 1 15%; 
@@ -18,11 +15,11 @@ $backspace-key-hover: lighten($backspace-key, 5%);
   }
 
   .center-board-container {
-    flex: 1 1 55%;
+    flex: 1 1 60%;
   }
 
   .right-pad-container {
-    flex: 1 1 15%;
+    flex: 1 1 10%;
   }
 
   .board-margin {
@@ -51,20 +48,20 @@ $backspace-key-hover: lighten($backspace-key, 5%);
         width: 100%;
         height: 100%;
         > path:first-child {
-          fill: $backspace-key;
+          fill: $button-secondary;
         }
       }
 
       &:hover, &.hover {
         background-color: transparent;
         > svg > path:first-child {
-          fill: $backspace-key-hover;
+          fill: $button-secondary-hover;
         }
       }    
 
       &.key-down {        
         > svg > path:first-child {
-          fill: $backspace-key-pressed;
+          fill: $button-secondary-pressed;
         }
       }   
 
@@ -78,7 +75,7 @@ $backspace-key-hover: lighten($backspace-key, 5%);
 
       @keyframes backspace-highlight {
         0% {
-          fill: $backspace-key-pressed;
+          fill: $button-secondary-pressed;
         }
         100% {
           fill: auto;
