@@ -57,9 +57,9 @@ export default class Keyboard extends Component {
     return (
       <div className="keyboard">
         {showNumPad && 
-            <div className="num-pad-container">
-              <NumPad />
-            </div>
+          <div className="num-pad-container">
+            <NumPad />
+          </div>
         }
         {showAlphanumeric && 
           <>
