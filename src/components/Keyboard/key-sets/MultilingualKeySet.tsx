@@ -1,14 +1,6 @@
 import EventEmitter from 'events';
-import DanishKeySet from './DanishKeySet';
 import EnglishKeySet from './EnglishKeySet';
-import FrenchKeySet from './FrenchKeySet';
-import GermanKeySet from './GermanKeySet';
-import ItalianKeySet from './ItalianKeySet';
 import LanguageKeySet from './LanguageKeySet';
-import NorwegianKeySet from './NorwegianKeySet';
-import RussianKeySet from './RussianKeySet';
-import SpanishKeySet from './SpanishKeySet';
-import SwedishKeySet from './SwedishKeySet';
 import KeyboardLayout from '../KeyboardLayout';
 
 export default class MultilingualKeySet extends EventEmitter {
@@ -16,14 +8,6 @@ export default class MultilingualKeySet extends EventEmitter {
   private _keySetIndex = 0;
   private _keySets: LanguageKeySet[] = [
     new EnglishKeySet(),
-    new SpanishKeySet(),
-    new FrenchKeySet(),
-    new GermanKeySet(),
-    new ItalianKeySet(),
-    new RussianKeySet(),
-    new DanishKeySet(),
-    new NorwegianKeySet(),
-    new SwedishKeySet()
   ]
 
   constructor() {
